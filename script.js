@@ -6,6 +6,7 @@ const modalOuter = document.querySelector('.outer');
 const orderList = document.querySelector('.order-list');
 const body = document.querySelector('body');
 
+// Event listener to show the form
 const clickAddOrder = (event) => {
     modalOuter.classList.add('open');
 }
@@ -36,6 +37,7 @@ const submitOrderButton = document.querySelector(`[type="submit"]`);
 const detailButton = document.querySelector('.detail');
 const deleteButton = document.querySelector('.served');
 
+// Submit form
 const submitOrder = (event) => {
     event.preventDefault();
     
@@ -58,6 +60,7 @@ submitOrderButton.addEventListener('click', submitOrder);
 const outerDetails = document.querySelector('outer-details');
 const innerDetails = document.querySelector('inner-details');
 
+// Showing details
 const showDetail = (event) => {
     // if (event.target.classList.contains('details')) {
         
@@ -94,6 +97,7 @@ window.addEventListener('keydown', escapeDetails);
 // detailButton.addEventListener('click', showDetail);
 
 
+// Delete list
 const deleteFunction = (event) => {
     if (event.target.classList.contains('served')) {
         const order = event.target;
