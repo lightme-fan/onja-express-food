@@ -78,27 +78,28 @@ const submitClickButton = (event) => {
 }
 
 // Detail button
-
 const detailsOrder = event => {
     if (event.target.matches('button.details')) {
-        // const detailButton = event.target;
-        const name = event.target;
-        const dish = event.target;
-        const size = event.target;
-        const amount = event.target;
-    
+        const name = document.querySelector('#name');
+        const dish = document.querySelector('.select-form');
+        const size = document.querySelector(`[type="radio"]`);
+        const amount = document.querySelector('#quantity');
+        
         const orderDetails = `
-            <h2>${name.value}</h2>
+            <h2>${name}</h2>
             <h3>Order:</h3>
-            <h4>${amount.value} ${dish.value} ${size.value}</h4>
+            <h4>${amount} ${dish} ${size}</h4>
             <img src="https://picsum.photos/500/200" alt>   
         `;
         
-        // event.target = orderDetails;
+        event.target = orderDetails;
+
+        // This is from HTML
         const innerDetails = document.querySelector('.inner-details');
         innerDetails.insertAdjacentHTML('afterbegin', orderDetails);
         console.log(innerDetails);
 
+        // This is from HTML
         const outerDetails = document.querySelector('.outer-details');
         outerDetails.classList.remove('open');
     }
