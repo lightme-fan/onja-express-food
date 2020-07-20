@@ -73,8 +73,21 @@ const handleClickButton = (event) => {
     }
 
     // Detail button 
-    if (event.target.classList.matches('button.details')) {
-        
+    if (event.target.matches('button.details')) {
+        const newName = document.querySelector('#name');
+        const selectForm = document.querySelector('.select-form');
+        const radioButton = document.querySelector(`[type="radio"]`);
+        const quantity = document.querySelector('#quantity');
+         
+        const orderDetails = `
+            <h2>${newName.value}</h2>
+            <h3>Order:</h3>
+            <h4>${quantity.value} ${radioButton.value} ${selectForm.value}</h4>
+        `;
+        event.target = orderDetails;
+        const innerDetails = document.querySelector('.inner-details');
+        innerDetails.innerHTML(orderDetails);
+
     }
 
     // Delete button
