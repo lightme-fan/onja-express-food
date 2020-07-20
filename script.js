@@ -1,5 +1,6 @@
 console.log('good luck!');
 
+// Grabing elements which I need
 const addOrderButton = document.querySelector('.add-order');
 const modalInner = document.querySelector('.inner');
 const modalOuter = document.querySelector('.outer');
@@ -52,50 +53,74 @@ const clickAddOrder = (event) => {
     `;
     modalOuter.classList.add('open');
 }
-addOrderButton.addEventListener('click', clickAddOrder);
 
 // handling all buttons
-const handleClickButton = (event) => {
-
+const submitClickButton = (event) => {
+    event.preventDefault();
     // Submit button of the form 
-    if (event.target.matches('button.submitOrder')) {
-        const name = document.querySelector('#name');
-        const newOrder = `
+    if (event.target.matches('form')) {
+        const form = event.target;
+        const name = form.name.value;
+        const dish = form.dish.value;
+        const size = form.size.value;
+        const amount = form.amount.value;
+
+        const anOrder = `
         <div class="order">
-            <span class="title">${name.value}</span>
+            <span class="title">${name}</span>
             <button class="details">Details</button>
             <button class="served">Delete order</button>
         </div>
     `;
-        event.target = newOrder;
-        orderList.insertAdjacentHTML('afterbegin', newOrder);
+        orderList.insertAdjacentHTML('afterbegin', anOrder);
         modalOuter.classList.remove('open');
     }
+}
 
-    // Detail button 
+// Detail button
+
+const detailsOrder = event => {
     if (event.target.matches('button.details')) {
-        const newName = document.querySelector('#name');
-        const selectForm = document.querySelector('.select-form');
-        const radioButton = document.querySelector(`[type="radio"]`);
-        const quantity = document.querySelector('#quantity');
-         
+        // const detailButton = event.target;
+        const name = event.target;
+        const dish = event.target;
+        const size = event.target;
+        const amount = event.target;
+    
         const orderDetails = `
-            <h2>${newName.value}</h2>
+            <h2>${name.value}</h2>
             <h3>Order:</h3>
-            <h4>${quantity.value} ${radioButton.value} ${selectForm.value}</h4>
+            <h4>${amount.value} ${dish.value} ${size.value}</h4>
+            <img src="https://picsum.photos/500/200" alt>   
         `;
-        event.target = orderDetails;
+        
+        // event.target = orderDetails;
         const innerDetails = document.querySelector('.inner-details');
-        innerDetails.innerHTML(orderDetails);
+        innerDetails.insertAdjacentHTML('afterbegin', orderDetails);
+        console.log(innerDetails);
 
+        const outerDetails = document.querySelector('.outer-details');
+        outerDetails.classList.remove('open');
     }
+}
 
-    // Delete button
+// Delete Order
+const deleteOrder = event => {
     if (event.target.classList.contains('served')) {
         const order = event.target;
         order.parentElement.remove();
     }
-
 }
-window.addEventListener('click',handleClickButton);
+
+// Add new order event listener
+addOrderButton.addEventListener('click', clickAddOrder);
+
+// Submit button event listener
+window.addEventListener('submit',submitClickButton);
+
+// Add showing order event listener
+window.addEventListener('click',detailsOrder);
+
+// Add delete order event listener
+window.addEventListener('click',deleteOrder);
 
